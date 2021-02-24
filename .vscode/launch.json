@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "args": "${command:SpecifyProgramArgs}",
+            "mainClass": "${file}",
+            "stepFilters": {
+                "skipClasses": [
+                    "$JDK",
+                    "java.util.*",
+                    "java.net.*",
+                    "java.lang.*",
+                    "junit.*"
+                ],
+                "skipSynthetics": false,
+                "skipStaticInitializers": false,
+                "skipConstructors": false
+            }
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "Lab8_73d3bf8b"
+        }
+    ]
+}
