@@ -15,7 +15,7 @@ public class WebCrawler
     /** Is the crawler was created */
     private boolean isCreated;
     /** Checker for threads */
-    private int[] checker;
+    private volatile int[] checker;
 
     WebCrawler(String urlString, int maxDepth)
     {
@@ -70,17 +70,16 @@ public class WebCrawler
             this.checker[0] = 0;
             for(int j = 0; j < remainLen; j++)
             {
-                Thread thread = new Thread(new CrawlTask(this.queue, i + 1));
+                Thread thread = new Thread(new CrawlTask(i + 1));
                 thread.start();
             }
             /** While not all threads completed */
             while(true)
             {
-                if(this.checker[0] >= remainLen) 
+                if(this.checker[0] == remainLen) 
                     break;
                 try { Thread.sleep(1000); } 
                 catch (Exception e) { }
-                
             }
             WorkLogger.write();
             ErrorLogger.write();
@@ -103,7 +102,7 @@ public class WebCrawler
     {
         private int currentDepth;
         /** The method to crawl the one page */
-        CrawlTask(ConcurrentLinkedQueue<URLPair> queue, int depth)
+        CrawlTask(int depth)
         {
             this.currentDepth = depth;
         }
