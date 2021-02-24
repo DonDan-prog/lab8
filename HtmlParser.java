@@ -1,25 +1,35 @@
 import java.io.BufferedReader;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class HtmlParser 
 {
     /** Constant prefixes */
-    private static final String APREFIX = "<a";
-    private static final String HREFPREFIX = "href=\"";
+    private static final String A_PREFIX = "<a";
+    private static final String HREF_PREFIX = "href=\"";
+
+    private URLPool pool;
+    private URLPair urlPair;
+    private int depth;
+
+    HtmlParser(URLPool pool, URLPair urlPair, int depth)
+    {
+        this.pool = pool;
+        this.urlPair = urlPair;
+        this.depth = depth;
+    }
     /** Perfoming parse on the fly of inputted data */
-    public static void parse(BufferedReader in, ConcurrentLinkedQueue<URLPair> queue, URLPair urlPair, int depth) throws Exception
+    public void parse(BufferedReader in) throws Exception
     {
         String line = "";
         while((line = in.readLine()) != null)
         {
-            int aTagStart = line.indexOf(APREFIX);
+            int aTagStart = line.indexOf(A_PREFIX);
             if(aTagStart == -1) continue;
-            int hrefStart = line.indexOf(HREFPREFIX, aTagStart);
+            int hrefStart = line.indexOf(HREF_PREFIX, aTagStart);
             if(hrefStart == -1) continue;
-            int hrefEnd = line.indexOf("\"", hrefStart + HREFPREFIX.length());
+            int hrefEnd = line.indexOf("\"", hrefStart + HREF_PREFIX.length());
             if(hrefEnd == -1) continue;
 
-            String url = line.substring(hrefStart + HREFPREFIX.length(), hrefEnd);
+            String url = line.substring(hrefStart + HREF_PREFIX.length(), hrefEnd);
             if(url.startsWith("#")) continue;
             /** This means that URL with hidden protocol */
             if(url.startsWith("//")) url = urlPair.getProtocol() + "://" + url;
@@ -28,7 +38,7 @@ public class HtmlParser
 
             try
             {
-                queue.add(new URLPair(url, depth));
+                pool.addToQueue(new URLPair(url, depth));
             }
             catch(Exception e)
             {
