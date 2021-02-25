@@ -10,6 +10,7 @@ public class App
         {
             try
             {
+                /** If not specified, uses 5 threads */
                 if(args.length == 3) WebCrawler.setNumThreads(Integer.parseInt(args[2]));
 
                 if(args.length == 4) WorkLogger.init(args[3]);

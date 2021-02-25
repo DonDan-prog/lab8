@@ -3,7 +3,7 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.InputStreamReader;
 
-public class Request 
+public class Request
 {
     /** Socket timeout in millisecs */
     private int timeout = 1 * 1000;

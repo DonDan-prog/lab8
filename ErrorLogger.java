@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ErrorLogger 
 {
-    /** Descripto of log file */
+    /** Descriptor of log file */
     private static FileWriter log = null;
     /** This is the formatter for data */
     private static SimpleDateFormat formatter = new SimpleDateFormat("[yyy-MM-dd 'at' HH:mm:ss] ");

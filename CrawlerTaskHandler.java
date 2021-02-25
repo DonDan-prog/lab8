@@ -1,39 +1,36 @@
-public class CrawlerTaskHandler
-{
-    private int numThreads;
-    private CrawlTask[] tasks;
-    private int loadedTasks;
+public class CrawlerTaskHandler 
+{   
+    private final int numThreads;
+    private final CrawlTask[] workres;
+    private final URLPool pool;
 
-    CrawlerTaskHandler(int numThreads)
+    CrawlerTaskHandler(URLPool pool, int numThreads)
     {
+        this.pool = pool;
         this.numThreads = numThreads;
-        this.loadedTasks = 0;
-        this.tasks = new CrawlTask[this.numThreads];
+        this.workres = new CrawlTask[numThreads];
     }
-
-    public void runNumTasks(URLPool pool, int depth, int amountTasks)
+    public void startTask(URLPair startUrl, Integer maxDepth)
     {
-        for(int i = 0; i < amountTasks; i += numThreads)
+        /** Add the first page to crawl - it's the start URL itself 
+         *  It MUSTN'T throw exception
+        */
+        try { this.pool.addToQueue(startUrl); } catch (Exception e) {}
+        /** Run the workers */
+        for(int i = 0; i < this.numThreads; i++)
         {
-            int limit = (i + numThreads < amountTasks ? numThreads : amountTasks - i);
-            this.loadedTasks = limit;
-
-            for(int j = 0; j < this.loadedTasks; j++)
-            {
-                this.tasks[j] = new CrawlTask(pool, depth);
-                this.tasks[j].start();
-            }
-            while(this.isTasksComplete() == false) { try{ Thread.sleep(1000);}catch(Exception e){}}
+            this.workres[i] = new CrawlTask(this.pool, maxDepth);
+            this.workres[i].start();
         }
     }
-
-    private boolean isTasksComplete()
+    public boolean isEnd()
     {
-        for(int i = 0; i < this.loadedTasks; i++)
+        int waiting = 0;
+        for(int i = 0; i < numThreads; i++)
         {
-            if(this.tasks[i].isAlive() == true)
-                return false;
+            if(this.workres[i].isWaiting() == true)
+                waiting++;
         }
-        return true;
+        return waiting == this.numThreads;
     }
 }

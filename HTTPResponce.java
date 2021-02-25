@@ -10,7 +10,7 @@ public final class HTTPResponce
 
     public HTTPResponce(BufferedReader in) throws Exception
     {
-        this.values = new HashMap<>();
+        this.values = new HashMap<String, String>();
         /** Read the first line, in HTTP it MUST contain status code */
         String line = in.readLine();
         statusCode = Integer.parseInt(line.split(" ")[1]);
