@@ -1,0 +1,87 @@
+[2021-02-25 at 11:52::05] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unknown protocol caused from user
+[2021-02-25 at 11:52::05] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0001.jpg
+[2021-02-25 at 11:52::05] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0002.jpg
+[2021-02-25 at 11:52::05] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0003.jpg
+[2021-02-25 at 11:52::05] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0004.jpg
+[2021-02-25 at 11:52::05] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0001.jpg
+[2021-02-25 at 11:52::05] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0002.jpg
+[2021-02-25 at 11:52::05] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0003.jpg
+[2021-02-25 at 11:52::05] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0004.jpg
+[2021-02-25 at 11:52::05] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: already visited
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: already visited
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: already visited
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: null url get
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://twitter.com/benjaminscott
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://www.linkedin.com/profile/view?id=9085417
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unknown protocol caused from portfolio.html
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unknown protocol caused from portfolio.html#mp-report-card
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unknown protocol caused from portfolio.html#natural-history-museum-data-portal
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unknown protocol caused from portfolio.html#richseam
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://github.com/qrohlf/trianglify
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: null url get
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: null url get
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: wrong type of content
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::06] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://api.audioblast.org/embed/generate.php?source=bio.acousti.ca&amp;id=58351
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unknown protocol caused from ../about/policies/termsandconditions
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unknown protocol caused from ../about/policies/datamanagement
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unknown protocol caused from ../about/policies/cookies
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unknown protocol caused from ../about/policies/privacy
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://api.audioblast.org/embed/generate.php?source=bio.acousti.ca&amp;id=58347
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://www.biotaxa.org/Zootaxa/issue/view/zootaxa.4926.3https://www.biotaxa.org/Zootaxa/article/view/zootaxa.4926.3.9https://www.biotaxa.org/Zootaxa/article/viewFile/67047/65250
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://api.audioblast.org/embed/generate.php?source=bio.acousti.ca&amp;id=58345
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://api.audioblast.org/embed/generate.php?source=bio.acousti.ca&amp;id=58346
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://linkinghub.elsevier.com/retrieve/pii/S0003347221000087
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://mathcination.wordpress.com/2016/04/25/the-beats-of-bitterns/
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://api.audioblast.org/embed/generate.php?source=bio.acousti.ca&amp;id=58353
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://api.audioblast.org/embed/generate.php?source=bio.acousti.ca&amp;id=58354
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://api.audioblast.org/embed/generate.php?source=bio.acousti.ca&amp;id=58348
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://api.audioblast.org/embed/generate.php?source=bio.acousti.ca&amp;id=58350
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: null url get
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://api.audioblast.org/embed/generate.php?source=bio.acousti.ca&amp;id=58349
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unknown protocol caused from user
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0001.jpg
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0002.jpg
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0003.jpg
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0004.jpg
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0001.jpg
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://api.audioblast.org/embed/generate.php?source=bio.acousti.ca&amp;id=58352
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0002.jpg
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0003.jpg
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: jpg file get caused from http://bio.acousti.ca/sites/default/files/0004.jpg
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::07] WebCrawler::WebCrawler: java.net.SocketTimeoutException: Read timed out
+[2021-02-25 at 11:52::08] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk
+[2021-02-25 at 11:52::08] WebCrawler::WebCrawler: java.lang.Exception: URLPair::URLPair: unsupported protocol caused from https://ebaker.me.uk

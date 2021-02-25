@@ -60,7 +60,7 @@ public class WebCrawler
         long startTime = System.currentTimeMillis();
         /** Add the first page to crawl - it's the start url itself */
         this.queue.add(this.urlStart);
-        for(int i = 0; i < this.maxDepth && this.queue.size() > 0; i++)
+        for(int i = 0; i <= this.maxDepth && this.queue.size() > 0; i++)
         {
             /** Log new step */
             WorkLogger.log("===== DEPTH " + i + " ======");
@@ -88,7 +88,7 @@ public class WebCrawler
         }
         /** End the log file and add the time elapsed and total sites visited */
         WorkLogger.log("====== END ======");
-        WorkLogger.log("Time elapsed: " + (System.currentTimeMillis() - startTime)/100.);
+        WorkLogger.log("Time elapsed: " + (System.currentTimeMillis() - startTime)/1000.);
         WorkLogger.log("Total visited sites: " + this.map.size());
 
         WorkLogger.write();
