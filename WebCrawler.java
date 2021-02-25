@@ -5,20 +5,31 @@ public class WebCrawler
     /** Variable to know how much workers will perform crawling */
     private static int numThreads = 5;
     /** Static method to set amount of workers */
-    public static void setNumThreads(int newNumThreads) { numThreads = newNumThreads; }
+    public static void setNumThreads(int newNumThreads) throws Exception 
+    { 
+        /** In case of incorrect input */
+        if(newNumThreads < 0)
+            throw new Exception("attepmt to create negative count of threads");
+        numThreads = newNumThreads; 
+    }
 
+    /** Pool of URL pairs; includes queue and visited collections */
     private URLPool pool;
     /** The specified start url pair */
     private URLPair urlStart;
     /** The specified maxDepth */
     private int maxDepth;
+    /** Task handler for multithread the crawling */
+    private CrawlerTaskHandler taskHandler;
 
     WebCrawler(String urlString, int maxDepth) throws Exception
     {
         this.urlStart = new URLPair(urlString, 0);
         this.maxDepth = maxDepth;
 
-        this.pool = new URLPool(numThreads, this.urlStart);
+        this.pool = new URLPool(numThreads);
+
+        this.taskHandler = new CrawlerTaskHandler(this.pool, numThreads);
     }
     /** Method for crawl the whole site */
     public void crawlSite()
@@ -29,29 +40,11 @@ public class WebCrawler
         WorkLogger.log("");
         /** Save the start time of crawling */
         long startTime = System.currentTimeMillis();
-        /** Add the first page to crawl - it's the start url itself 
-         *  It MUSTN'T throw exception
-        */
-        try { this.pool.addToQueue(this.urlStart); } catch (Exception e) {}
-        /** TODO: incapsulate CrawlerTaskHandler */
-        /** Run our workers */
-        CrawlTask[] tasks = new CrawlTask[numThreads];
-        for(int i = 0; i < numThreads; i++)
+        /** Start our workers */
+        this.taskHandler.startTask(this.urlStart, maxDepth);
+        /** Check workers finished their work; in case then all workers wait, then no ones work, that leads no more tasks -> the program finished */
+        while(taskHandler.isEnd() == false)
         {
-            tasks[i] = new CrawlTask(pool, maxDepth);
-            tasks[i].start();
-        }
-        /** Check if they waiting for another task; in case then all workers wait, then no ones work, that leads no more tasks -> the program finished */
-        boolean isEnd = false;
-        while(!isEnd)
-        {
-            int waiting = 0;
-            for(int i = 0; i < numThreads; i++)
-            {
-                if(tasks[i].isWaiting() == true)
-                    waiting++;
-            }
-            if(waiting == numThreads) break;
             /** Default timeout for 1 sec cause the socket timeout I set to 1 sec */
             try{Thread.sleep(1000);}catch(Exception e){}
         }

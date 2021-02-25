@@ -1,10 +1,10 @@
 public class CrawlTask extends Thread
 {
-    private URLPool pool;
+    private final URLPool pool;
     private boolean waiting;
-    private final int maxDepth;
+    private final Integer maxDepth;
     /** The method to crawl the one page */
-    CrawlTask(URLPool pool, int maxDepth)
+    CrawlTask(final URLPool pool, final Integer maxDepth)
     {
         this.pool = pool;
         this.waiting = true;
@@ -20,8 +20,9 @@ public class CrawlTask extends Thread
             {
                 /** The flag for our checker */
                 this.waiting = true;
-                /** We wait while our worker not recieve tasks */
-                while(this.pool.isEmpty() == true) { Thread.sleep(1000); }
+                /** We wait() while our worker not recieve tasks */
+                if(this.pool.isEmpty() == true)
+                    wait();
                 /** Recieve task */
                 URLPair urlPair = this.pool.poll();
                 /** If something happend and we got null, just skip it */
@@ -33,12 +34,11 @@ public class CrawlTask extends Thread
                 this.waiting = false;
                 /** If not - add to visited */
                 pool.addVisited(urlPair);
-                System.out.println("Checking " + urlPair);
                 /** Add to log that site is visiting */
                 WorkLogger.log(urlPair.toString());
                 /** Make new request */
                 Request request = new Request(urlPair);
-                HtmlParser parser = new HtmlParser(this.pool, urlPair, urlPair.getDepth());
+                RegexHtmlParser parser = new RegexHtmlParser(this.pool, urlPair, urlPair.getDepth());
                 /** Send GET request */
                 request.sendGET();
                 /** Parse the responce */
@@ -62,7 +62,6 @@ public class CrawlTask extends Thread
 
                     request = new Request(urlPair);
                     responce = new HTTPResponce(request.getBufferedReader());
-
                     if(responce.getStatusCode() == 200)
                         parser.parse(request.getBufferedReader());
                 }

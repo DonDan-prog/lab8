@@ -6,7 +6,7 @@ public class WorkLogger
     /** Log file descriptor */
     private static FileWriter log = null;
 
-    /** Initialize with given name */
+    /** Initializing log file with given name */
     static void init(String logName) 
     {
         try 

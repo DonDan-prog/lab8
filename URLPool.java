@@ -9,16 +9,15 @@ public final class URLPool
     private final HashMap<URLPair, Integer> visitedMap;
 
     /** Init collections and add the start url to queue list */
-    URLPool(int numThreads, URLPair startUrl)
+    URLPool(int numThreads)
     {
         this.queuePairs = new LinkedList<URLPair>();
-        queuePairs.add(startUrl);
         this.visitedMap = new HashMap<URLPair, Integer>();
     }
     /** Some methods to work */
     public int getQueueSize() { return queuePairs.size(); }
     public int getVisitedSize() { return visitedMap.size(); }
-    public boolean isEmpty() { return queuePairs.size() < 0; }
+    public synchronized boolean isEmpty() { return queuePairs.size() < 0; }
     public Set<URLPair> getVisitedKeys() { return visitedMap.keySet(); }
     /** Method to add the URL in the queue; it able to add only if this URL was never been visited yet */
     public synchronized boolean addToQueue(URLPair urlPair) throws Exception
@@ -26,6 +25,8 @@ public final class URLPool
         if(visitedMap.containsKey(urlPair) == true)
             throw new Exception("already in visited");
         queuePairs.addLast(urlPair);
+        /** Notify all threads that thay able to get a task */
+        notify();
         return true;
     }
     /** Adding URL to visited; no need to check because we made sure that this URL unvisited earlier */

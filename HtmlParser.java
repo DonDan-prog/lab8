@@ -8,9 +8,9 @@ public class HtmlParser
 
     private URLPool pool;
     private URLPair urlPair;
-    private int depth;
+    private Integer depth;
 
-    HtmlParser(URLPool pool, URLPair urlPair, int depth)
+    HtmlParser(URLPool pool, URLPair urlPair, Integer depth)
     {
         this.pool = pool;
         this.urlPair = urlPair;
@@ -19,31 +19,42 @@ public class HtmlParser
     /** Perfoming parse on the fly of inputted data */
     public void parse(BufferedReader in) throws Exception
     {
+        long startTime = System.currentTimeMillis();
         String line = "";
-        while((line = in.readLine()) != null)
-        {
-            int aTagStart = line.indexOf(A_PREFIX);
-            if(aTagStart == -1) continue;
-            int hrefStart = line.indexOf(HREF_PREFIX, aTagStart);
-            if(hrefStart == -1) continue;
-            int hrefEnd = line.indexOf("\"", hrefStart + HREF_PREFIX.length());
-            if(hrefEnd == -1) continue;
 
-            String url = line.substring(hrefStart + HREF_PREFIX.length(), hrefEnd);
-            if(url.startsWith("#")) continue;
+        /** We'll read the whole page anyway, so using the thread-unsafe builder will be most efficient */
+        StringBuilder builder = new StringBuilder();
+        while((line = in.readLine()) != null)
+            builder.append(line);
+        /** Search all of <a tags using hand parse */
+        int pos = 0;
+        while(pos < builder.length())
+        {
+            int aTagStart = builder.indexOf(A_PREFIX, pos);
+            if(aTagStart == -1) { pos++; continue; }
+            pos = aTagStart;
+            int hrefStart = builder.indexOf(HREF_PREFIX, pos);
+            if(hrefStart == -1) { pos++; continue; }
+            pos = hrefStart;
+            int hrefEnd = builder.indexOf("\"", pos + HREF_PREFIX.length());
+            if(hrefEnd == -1) { pos++; continue; }
+
+            String url = builder.substring(pos + HREF_PREFIX.length(), hrefEnd);
+            pos = hrefEnd;
+            if(url.startsWith("#")) { pos++; continue; }
             /** This means that URL with hidden protocol */
             if(url.startsWith("//")) url = urlPair.getProtocol() + "://" + url;
             /** This means that URL with hidden domen */
             if(url.startsWith("/")) url = urlPair.getFullUrl() + url.substring(1);
-
             try
             {
-                pool.addToQueue(new URLPair(url, depth + 1));
+                pool.addToQueue(new URLPair(url, this.depth + 1));
             }
             catch(Exception e)
             {
                 ErrorLogger.log("WebCrawler::WebCrawler: " + e + " caused from " + url);
             }
         }
+        System.out.println(String.format("Time %f for parsing page %s", (System.currentTimeMillis() - startTime)/1000., this.urlPair));
     }
 }

@@ -11,9 +11,9 @@ public class URLPair
     /** The query string; not using now, don't know for what */
     private String queryString;
     /** The port of URLPair */
-    private int port;
+    private Integer port;
     /** The current depth; using for crawler */
-    private int depth;
+    private Integer depth;
 
     /** We need to handle the hidden protocol, hidden domen and relative URL in parser */
     URLPair() 
@@ -28,7 +28,7 @@ public class URLPair
         this.depth = 0;
     }
     /** The constructor for the pair of url and depth */
-    URLPair(String url, final int depth) throws Exception
+    URLPair(String url, final Integer depth) throws Exception
     {
         /** Check for valid protocol */
         if(url == null) throw new Exception("URLPair::URLPair: null url get");
@@ -119,8 +119,8 @@ public class URLPair
     public String getPath() { return this.pathString; }
     public String getQuery() { return this.queryString; }
     
-    public int getDepth() { return this.depth; }
-    public int getPort() { return this.port; }
+    public Integer getDepth() { return this.depth; }
+    public Integer getPort() { return this.port; }
 
     /** Methods to work with Java collections and to print normally */
     public boolean equals(Object obj)
