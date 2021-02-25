@@ -11,6 +11,7 @@ public class HtmlParser
     private Integer depth;
 
     HtmlParser(URLPool pool, URLPair urlPair, Integer depth)
+
     {
         this.pool = pool;
         this.urlPair = urlPair;
@@ -42,6 +43,7 @@ public class HtmlParser
             String url = builder.substring(pos + HREF_PREFIX.length(), hrefEnd);
             pos = hrefEnd;
             if(url.startsWith("#")) { pos++; continue; }
+
             /** This means that URL with hidden protocol */
             if(url.startsWith("//")) url = urlPair.getProtocol() + "://" + url;
             /** This means that URL with hidden domen */
@@ -49,6 +51,7 @@ public class HtmlParser
             try
             {
                 pool.addToQueue(new URLPair(url, this.depth + 1));
+
             }
             catch(Exception e)
             {
