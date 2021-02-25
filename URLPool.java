@@ -4,14 +4,23 @@ import java.util.Set;
 
 public final class URLPool 
 {
-    private final LinkedList<URLPair> queuePairs = new LinkedList<URLPair>();
-    private final HashMap<URLPair, Integer> visitedMap = new HashMap<URLPair, Integer>();
+    /** Collections for keep track of visited pages and qeued pages */
+    private final LinkedList<URLPair> queuePairs;
+    private final HashMap<URLPair, Integer> visitedMap;
 
+    /** Init collections and add the start url to queue list */
+    URLPool(int numThreads, URLPair startUrl)
+    {
+        this.queuePairs = new LinkedList<URLPair>();
+        queuePairs.add(startUrl);
+        this.visitedMap = new HashMap<URLPair, Integer>();
+    }
+    /** Some methods to work */
     public int getQueueSize() { return queuePairs.size(); }
     public int getVisitedSize() { return visitedMap.size(); }
-    public boolean isEmpty() { return queuePairs.size() > 0; }
+    public boolean isEmpty() { return queuePairs.size() < 0; }
     public Set<URLPair> getVisitedKeys() { return visitedMap.keySet(); }
-
+    /** Method to add the URL in the queue; it able to add only if this URL was never been visited yet */
     public synchronized boolean addToQueue(URLPair urlPair) throws Exception
     {
         if(visitedMap.containsKey(urlPair) == true)
@@ -19,10 +28,12 @@ public final class URLPool
         queuePairs.addLast(urlPair);
         return true;
     }
+    /** Adding URL to visited; no need to check because we made sure that this URL unvisited earlier */
     public synchronized void addVisited(URLPair urlPair)
     {
         visitedMap.put(urlPair, 0);
     }
+    /** Getting the first from the queue */
     public synchronized URLPair poll()
     {
         return queuePairs.pollFirst();

@@ -38,7 +38,7 @@ public class HtmlParser
 
             try
             {
-                pool.addToQueue(new URLPair(url, depth));
+                pool.addToQueue(new URLPair(url, depth + 1));
             }
             catch(Exception e)
             {
