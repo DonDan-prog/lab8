@@ -23,7 +23,7 @@ public class CrawlerTaskHandler
                 this.tasks[j] = new CrawlTask(pool, depth);
                 this.tasks[j].start();
             }
-            while(this.isTasksComplete() == false) { try{ Thread.sleep(100);}catch(Exception e){}}
+            while(this.isTasksComplete() == false) { try{ Thread.sleep(1000);}catch(Exception e){}}
         }
     }
 
