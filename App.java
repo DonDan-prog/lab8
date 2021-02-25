@@ -8,11 +8,13 @@ public class App
         /** Check if we specify equal or more than 2 arguments; if less - that's the wrong usage */
         if(args.length > 1)
         {
-            if(args.length == 3) WorkLogger.init(args[2]);
-            else WorkLogger.init("log.txt");
-
-            try 
+            try
             {
+                if(args.length == 3) WebCrawler.setNumThreads(Integer.parseInt(args[2]));
+
+                if(args.length == 4) WorkLogger.init(args[3]);
+                else WorkLogger.init("log.txt");
+
                 WebCrawler crawler = new WebCrawler(args[0], Integer.parseInt(args[1]));
                 crawler.crawlSite();
 
