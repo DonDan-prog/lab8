@@ -37,7 +37,7 @@ public class WorkLogger
     public static void close()
     {
         if(log == null) return;
-        try { log.close(); } 
+        try { log.close(); log = null; } 
         catch (Exception e) { ErrorLogger.log("WorkLogger::close: " + e); }
     }
 }

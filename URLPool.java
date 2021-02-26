@@ -17,7 +17,7 @@ public final class URLPool
     /** Some methods to work */
     public int getQueueSize() { return queuePairs.size(); }
     public int getVisitedSize() { return visitedMap.size(); }
-    public synchronized boolean isEmpty() { return queuePairs.size() < 0; }
+    public synchronized boolean isEmpty() { return queuePairs.size() <= 0; }
     public Set<URLPair> getVisitedKeys() { return visitedMap.keySet(); }
     /** Method to add the URL in the queue; it able to add only if this URL was never been visited yet */
     public synchronized boolean addToQueue(URLPair urlPair)

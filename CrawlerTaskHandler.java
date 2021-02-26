@@ -26,11 +26,16 @@ public class CrawlerTaskHandler
     public boolean isEnd()
     {
         int waiting = 0;
-        for(int i = 0; i < numThreads; i++)
+        for(int i = 0; i < this.numThreads; i++)
         {
             if(this.workres[i].isWaiting() == true)
                 waiting++;
         }
         return waiting == this.numThreads;
+    }
+    public void stopTasks()
+    {
+        for(int i = 0; i < this.numThreads; i++)
+            this.workres[i].interrupt();
     }
 }

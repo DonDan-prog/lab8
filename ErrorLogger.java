@@ -34,14 +34,14 @@ public class ErrorLogger
         }
         catch(Exception e)
         {
-            ErrorLogger.log("WorkLogger::write: " + e);
+            System.out.println("ErrorLogger::log: " + e);
         }
     }
     /** The method to close the file */
     public static void close()
     {
         if(log == null) return;
-        try { log.close(); } 
+        try { log.close(); log = null; } 
         catch (Exception e) { }
     }
 }

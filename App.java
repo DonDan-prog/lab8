@@ -1,41 +1,50 @@
+import ArgumentParser.*;
+
 public class App
 {
     public static void main(String[] args) 
     {
         /** Whenether the input, first init the error logger */
-        final String errorLogName = "error.txt";
+        final String errorLogName = "errors.txt";
         ErrorLogger.init(errorLogName);
-        /** Check if we specify equal or more than 2 arguments; if less - that's the wrong usage */
-        if(args.length > 1)
+
+        /** Creating holders for command promt arguments */
+        StringHolder urlHolder = new StringHolder();
+        IntHolder depthHolder = new IntHolder();
+
+        IntHolder flagThreadsHolder = new IntHolder();
+        StringHolder flagLogNameHolder = new StringHolder();
+
+        ArgumentParser parser = new ArgumentParser("App");
+        try
         {
-            try
-            {
-                /** If not specified, uses 5 threads */
-                if(args.length == 3) WebCrawler.setNumThreads(Integer.parseInt(args[2]));
+            /** Adding positional and thus required arguments to parser */
+            parser.addPositional("the url to crawl", "url", urlHolder);
+            parser.addPositional("the max depth of crawler", "depth", depthHolder);
+            /** Adding the non positional and non required arguments */
+            parser.addArgument("-t %d the num of threads to crawl", "threads", flagThreadsHolder, false);
+            parser.addArgument("-l %s the name of log file", "logName", flagLogNameHolder, false);
+            /** Parse the command promt arguments */
+            parser.parse(args);
 
-                if(args.length == 4) WorkLogger.init(args[3]);
-                else WorkLogger.init("log.txt");
+            if(flagThreadsHolder.isEmpty() == false) WebCrawler.setNumThreads(flagThreadsHolder.getResource());
+            if(flagLogNameHolder.isEmpty() == false) WorkLogger.init(flagLogNameHolder.getResource());
+            else WorkLogger.init("log.txt");
+            
+            WebCrawler crawler = new WebCrawler(urlHolder.getResource(), depthHolder.getResource());
+            crawler.crawlSite();
 
-                WebCrawler crawler = new WebCrawler(args[0], Integer.parseInt(args[1]));
-                crawler.crawlSite();
-
-                for(URLPair i : crawler.getVisited())
-                    System.out.println(i);
-            } 
-            catch (Exception e)
-            {
-                ErrorLogger.log(e.toString());
-                System.out.println("Probably You mistyped the input. Check the " + errorLogName + " for more information");
-                System.out.println("Usage: java App.java <full url> <maxDepth> [log name]");
-            }
-
-            WorkLogger.close();
-        }
-        else
+            for(URLPair i : crawler.getVisited())
+                System.out.println(i);
+        } 
+        catch (Exception e)
         {
-            ErrorLogger.log("Error in launcging program: didn't use command args");
-            System.out.println("Usage: java App.java <full url> <maxDepth> [log name]");
+            ErrorLogger.log(e.toString());
+            System.out.println("Probably You mistyped the input. Check the " + errorLogName + " for more information");
+            System.out.println(parser);
         }
+
+        WorkLogger.close();
         ErrorLogger.close();
     }
 }

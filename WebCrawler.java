@@ -43,11 +43,12 @@ public class WebCrawler
         /** Start our workers */
         this.taskHandler.startTask(this.urlStart, maxDepth);
         /** Check workers finished their work; in case then all workers wait, then no ones work, that leads no more tasks -> the program finished */
-        while(taskHandler.isEnd() == false)
+        while(this.taskHandler.isEnd() == false)
         {
             /** Default timeout for 1 sec cause the socket timeout I set to 1 sec */
             try{Thread.sleep(1000);}catch(Exception e){}
         }
+        this.taskHandler.stopTasks();
         /** End the log file and add the time elapsed and total sites visited */
         WorkLogger.log("====== END ======");
         WorkLogger.log("Time elapsed: " + (System.currentTimeMillis() - startTime)/1000.);

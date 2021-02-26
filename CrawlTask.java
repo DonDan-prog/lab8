@@ -14,7 +14,7 @@ public class CrawlTask extends Thread
     @Override
     public void run()
     {
-        while(true)
+        while(!isInterrupted())
         {
             try 
             {
@@ -26,7 +26,7 @@ public class CrawlTask extends Thread
                 /** Recieve task */
                 URLPair urlPair = this.pool.poll();
                 /** If something happend and we got null, just skip it */
-                if(urlPair == null) continue;
+                if(urlPair == null) break;
                 /** If depth of gotten task is more, than maxDepth, then the program shall complete; break the cycle and this will terminate the worker */
                 if(urlPair.getDepth() > this.maxDepth)
                     break;
@@ -68,6 +68,8 @@ public class CrawlTask extends Thread
                 /** Close the request as we already done all we can do with it */
                 request.close();
             }
+            catch(InterruptedException e) { break; }
+            catch(IllegalMonitorStateException e) {}
             catch (Exception e) 
             {
                 /** Log the error */
