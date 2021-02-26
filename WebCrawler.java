@@ -50,7 +50,7 @@ public class WebCrawler
         }
         this.taskHandler.stopTasks();
         /** End the log file and add the time elapsed and total sites visited */
-        WorkLogger.log("====== END ======");
+        WorkLogger.log("\r\n====== END ======");
         WorkLogger.log("Time elapsed: " + (System.currentTimeMillis() - startTime)/1000.);
         WorkLogger.log("Total visited sites: " + this.pool.getVisitedSize());
     }

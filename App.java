@@ -7,7 +7,6 @@ public class App
         /** Whenether the input, first init the error logger */
         final String errorLogName = "errors.txt";
         ErrorLogger.init(errorLogName);
-
         /** Creating holders for command promt arguments */
         StringHolder urlHolder = new StringHolder();
         IntHolder depthHolder = new IntHolder();
@@ -26,7 +25,7 @@ public class App
             parser.addArgument("-l %s the name of log file", "logName", flagLogNameHolder, false);
             /** Parse the command promt arguments */
             parser.parse(args);
-
+            
             if(flagThreadsHolder.isEmpty() == false) WebCrawler.setNumThreads(flagThreadsHolder.getResource());
             if(flagLogNameHolder.isEmpty() == false) WorkLogger.init(flagLogNameHolder.getResource());
             else WorkLogger.init("log.txt");
