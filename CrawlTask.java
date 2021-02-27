@@ -1,14 +1,16 @@
+import java.util.NoSuchElementException;
+
 public class CrawlTask extends Thread
 {
     private final URLPool pool;
     private boolean waiting;
-    private final Integer maxDepth;
+    private final RegexHtmlParser parser;
     /** The method to crawl the one page */
     CrawlTask(final URLPool pool, final Integer maxDepth)
     {
         this.pool = pool;
         this.waiting = true;
-        this.maxDepth = maxDepth;
+        this.parser = new RegexHtmlParser(this.pool, maxDepth);
     }
     public boolean isWaiting() { return this.waiting; }
     @Override
@@ -16,29 +18,27 @@ public class CrawlTask extends Thread
     {
         while(!isInterrupted())
         {
+            URLPair urlPair = null;
             try 
             {
                 /** The flag for our checker */
                 this.waiting = true;
-                /** We wait() while our worker not recieve tasks */
-                if(this.pool.isEmpty() == true)
-                    wait();
                 /** Recieve task */
-                URLPair urlPair = this.pool.poll();
+                urlPair = this.pool.poll();
                 /** If something happend and we got null, just skip it */
-                if(urlPair == null) break;
-                /** If depth of gotten task is more, than maxDepth, then the program shall complete; break the cycle and this will terminate the worker */
-                if(urlPair.getDepth() > this.maxDepth)
-                    break;
+                if(urlPair == null)
+                {
+                    wait();
+                    continue;
+                }
                 /** The flag set to checker that worker is working now */
                 this.waiting = false;
-                /** If not - add to visited */
+
                 pool.addVisited(urlPair);
                 /** Add to log that site is visiting */
                 WorkLogger.log(urlPair.toString());
                 /** Make new request */
                 Request request = new Request(urlPair);
-                RegexHtmlParser parser = new RegexHtmlParser(this.pool, urlPair, urlPair.getDepth());
                 /** Send GET request */
                 request.sendGET();
                 /** Parse the responce */
@@ -51,9 +51,7 @@ public class CrawlTask extends Thread
                  */
                 if(statusCode == 200)
                 {
-                    if(responce.getParameter("Content-Type").indexOf("text/html") == -1)
-                        throw new Exception("wrong type of content");
-                    parser.parse(request.getBufferedReader());
+                    parser.parse(request.getBufferedReader(), urlPair, urlPair.getDepth());
                 }
                 else if(statusCode == 301)
                 {
@@ -63,17 +61,22 @@ public class CrawlTask extends Thread
                     request = new Request(urlPair);
                     responce = new HTTPResponce(request.getBufferedReader());
                     if(responce.getStatusCode() == 200)
-                        parser.parse(request.getBufferedReader());
+                        parser.parse(request.getBufferedReader(), urlPair, urlPair.getDepth());
                 }
+                else
+                    ErrorLogger.log("Page " + urlPair + " status code " + statusCode);
                 /** Close the request as we already done all we can do with it */
                 request.close();
             }
-            catch(InterruptedException e) { break; }
+            catch(NoSuchElementException e)
+            {
+                continue;
+            }
             catch(IllegalMonitorStateException e) {}
             catch (Exception e) 
             {
                 /** Log the error */
-                ErrorLogger.log("WebCrawler::WebCrawler: " + e);
+                ErrorLogger.log("CrawlerTask::run: " + e);
             }
         }
     }

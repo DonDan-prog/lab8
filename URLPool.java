@@ -1,28 +1,28 @@
-import java.util.LinkedList;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public final class URLPool 
 {
     /** Collections for keep track of visited pages and qeued pages */
-    private final LinkedList<URLPair> queuePairs;
-    private final HashMap<URLPair, Integer> visitedMap;
+    private final HashSet<URLPair> queuePairs;
+    private final HashSet<URLPair> visitedSet;
 
     /** Init collections and add the start url to queue list */
     URLPool(int numThreads)
     {
-        this.queuePairs = new LinkedList<URLPair>();
-        this.visitedMap = new HashMap<URLPair, Integer>();
+        this.queuePairs = new HashSet<URLPair>(5000);
+        this.visitedSet = new HashSet<URLPair>(5000);
     }
     /** Some methods to work */
-    public int getQueueSize() { return queuePairs.size(); }
-    public int getVisitedSize() { return visitedMap.size(); }
-    public synchronized boolean isEmpty() { return queuePairs.size() <= 0; }
-    public Set<URLPair> getVisitedKeys() { return visitedMap.keySet(); }
+    public int getVisitedSize() { return this.visitedSet.size(); }
+    public Set<URLPair> getVisitedKeys() { return this.visitedSet; }
     /** Method to add the URL in the queue; it able to add only if this URL was never been visited yet */
-    public synchronized boolean addToQueue(URLPair urlPair)
+    public synchronized boolean addToQueue(URLPair urlPair) throws Exception
     {
-        queuePairs.addLast(urlPair);
+        if(queuePairs.contains(urlPair) == true)
+            throw new Exception("already queued");
+        queuePairs.add(urlPair);
         /** Notify all threads that thay able to get a task */
         notify();
         return true;
@@ -30,13 +30,24 @@ public final class URLPool
     /** Adding URL to visited; no need to check because we made sure that this URL unvisited earlier */
     public synchronized void addVisited(URLPair urlPair) throws Exception
     {
-        if(visitedMap.containsKey(urlPair) == true)
-            throw new Exception("already in visited");
-        visitedMap.put(urlPair, 0);
+        if(visitedSet.contains(urlPair) == true)
+            throw new Exception("already visited");
+        visitedSet.add(urlPair);
+
+        //System.gc();
+        System.out.println("Queue size: " + queuePairs.size());
+        System.out.println("Visited size: " + visitedSet.size());
     }
     /** Getting the first from the queue */
     public synchronized URLPair poll()
     {
-        return queuePairs.pollFirst();
+        Iterator<URLPair> it = this.queuePairs.iterator();
+        URLPair ret = it.next();
+        try
+        {
+            this.queuePairs.remove(ret);
+        } catch(Exception e) { System.out.println("Error: " + e); }
+        
+        return ret;
     }
 }

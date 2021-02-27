@@ -15,6 +15,8 @@ public class URLPair
     /** The current depth; using for crawler */
     private Integer depth;
 
+    private int hash;
+
     /** We need to handle the hidden protocol, hidden domen and relative URL in parser */
     URLPair() 
     {
@@ -26,6 +28,7 @@ public class URLPair
         this.queryString = null;
         this.port = 0;
         this.depth = 0;
+        this.hash = 0;
     }
     /** The constructor for the pair of url and depth */
     URLPair(String url, final Integer depth) throws Exception
@@ -49,6 +52,7 @@ public class URLPair
         StringBuilder urlBuilder = new StringBuilder(url);
         parseUrl(urlBuilder);
         this.depth = depth;
+        this.hash = this.fullUrlString.hashCode();
     }
     /** Hidden method for parse url 
      *  Complicated one
@@ -135,7 +139,7 @@ public class URLPair
         return this.fullUrlString.equals(other.fullUrlString); 
 
     }
-    public int hashCode() { return this.fullUrlString.hashCode(); }
+    public int hashCode() { return this.hash; }
 
     /** The function speaks for itself */
     public String toString()

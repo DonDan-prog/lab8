@@ -6,29 +6,28 @@ public class RegexHtmlParser
     private final String A_HREF_STRING = "<a[^>]+href=\"(.+?)\"";
     private final int MAX_LEN = 200;
 
-    private URLPool pool;
-    private URLPair urlPair;
-    private Integer depth;
+    private final Pattern pagePattern = Pattern.compile(A_HREF_STRING);
 
-    RegexHtmlParser(URLPool pool, URLPair urlPair, Integer depth)
+    private URLPool pool;
+    private Integer maxDepth;
+
+    RegexHtmlParser(URLPool pool, Integer maxDepth)
     {
         this.pool = pool;
-        this.urlPair = urlPair;
-        this.depth = depth;
+        this.maxDepth = maxDepth;
     }
-    public void parse(BufferedReader in) throws Exception
+    public void parse(BufferedReader in, URLPair urlPair, Integer depth) throws Exception
     {
-        long startTime = System.currentTimeMillis();
+        //long startTime = System.currentTimeMillis();
         String line = "";
 
         /** We'll read the whole page anyway, so using the thread-unsafe builder will be most efficient */
-        Pattern patternPage = Pattern.compile(A_HREF_STRING);
         StringBuilder builder = new StringBuilder(MAX_LEN);
         while((line = in.readLine()) != null)
         {
             builder.insert(0, line);
             builder.setLength(line.length());
-            Matcher matcherAtag = patternPage.matcher(builder);
+            Matcher matcherAtag = this.pagePattern.matcher(builder);
             if(matcherAtag.find() == true)
             {
                 String url = builder.substring(builder.indexOf("href=\"", matcherAtag.start()) + 6, matcherAtag.end() - 1);
@@ -41,7 +40,8 @@ public class RegexHtmlParser
                 if(url.startsWith("/")) url = urlPair.getFullUrl() + url.substring(1);
                 try
                 {
-                    pool.addToQueue(new URLPair(url, this.depth + 1));
+                    if(this.maxDepth > depth)
+                        pool.addToQueue(new URLPair(url, depth + 1));
                 }
                 catch(Exception e)
                 {
@@ -49,7 +49,7 @@ public class RegexHtmlParser
                 }
             }
         }
-        System.out.println(String.format("Time %f for parsing page %s", (System.currentTimeMillis() - startTime)/1000., this.urlPair));
+        //System.out.println(String.format("Time %f for parsing page %s", (System.currentTimeMillis() - startTime)/1000., this.urlPair));
     }
 
 }
